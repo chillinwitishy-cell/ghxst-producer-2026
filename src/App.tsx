@@ -4,13 +4,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider, useAuth } from "@/hooks/useAuth";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
-import Auth from "./pages/Auth.tsx";
-import Library from "./pages/Library.tsx";
-import Upload from "./pages/Upload.tsx";
-import TrackDetail from "./pages/TrackDetail.tsx";
-import Settings from "./pages/Settings.tsx";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+import Auth from "./pages/Auth";
+import Library from "./pages/Library";
+import Upload from "./pages/Upload";
+import TrackDetail from "./pages/TrackDetail";
+import Settings from "./pages/Settings";
 
 const queryClient = new QueryClient();
 
