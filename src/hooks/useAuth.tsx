@@ -7,11 +7,13 @@ interface User {
 
 interface AuthContext {
   user: User | null;
+  loading: boolean;
   signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContext>({
   user: null,
+  loading: false,
   signOut: async () => {}
 });
 
@@ -20,14 +22,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     id: 'demo-user',
     email: 'demo@ghxst.ai'
   });
+  const [loading] = useState(false);
   
   const signOut = async () => {
-    // Mock sign out
     console.log('Signing out...');
   };
   
   return (
-    <AuthContext.Provider value={{ user, signOut }}>
+    <AuthContext.Provider value={{ user, loading, signOut }}>
       {children}
     </AuthContext.Provider>
   );
