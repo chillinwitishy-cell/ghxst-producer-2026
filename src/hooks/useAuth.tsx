@@ -1,39 +1,36 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import type { Session, User } from "@supabase/supabase-js";
-import { supabase } from "@/integrations/supabase/client";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-interface AuthCtx {
+interface User {
+  id: string;
+  email: string;
+}
+
+interface AuthContext {
   user: User | null;
-  session: Session | null;
-  loading: boolean;
   signOut: () => Promise<void>;
 }
 
-const Ctx = createContext<AuthCtx>({ user: null, session: null, loading: true, signOut: async () => {} });
+const AuthContext = createContext<AuthContext>({
+  user: null,
+  signOut: async () => {}
+});
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => {
-      setSession(s);
-      setUser(s?.user ?? null);
-    });
-    supabase.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      setUser(data.session?.user ?? null);
-      setLoading(false);
-    });
-    return () => sub.subscription.unsubscribe();
-  }, []);
-
+  const [user] = useState<User | null>({
+    id: 'demo-user',
+    email: 'demo@ghxst.ai'
+  });
+  
+  const signOut = async () => {
+    // Mock sign out
+    console.log('Signing out...');
+  };
+  
   return (
-    <Ctx.Provider value={{ user, session, loading, signOut: async () => { await supabase.auth.signOut(); } }}>
+    <AuthContext.Provider value={{ user, signOut }}>
       {children}
-    </Ctx.Provider>
+    </AuthContext.Provider>
   );
 }
 
-export const useAuth = () => useContext(Ctx);
+export const useAuth = () => useContext(AuthContext);
