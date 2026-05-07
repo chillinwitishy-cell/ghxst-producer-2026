@@ -4,359 +4,215 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GHXST Da Producer AI — Master your tracks with AI</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: #ffffff;
-            min-height: 100vh;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-        
-        header {
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            text-decoration: none;
-            color: white;
-        }
-        
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
-            border-radius: 8px;
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
-        }
-        
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-        
-        .text-gradient {
-            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        nav {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-hero {
-            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
-            color: white;
-        }
-        
-        .btn-ghost {
-            background: transparent;
-            color: #ccc;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        
-        .btn:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
-        
-        .hero {
-            text-align: center;
-            padding: 6rem 0;
-        }
-        
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            margin-bottom: 2rem;
-            font-size: 0.875rem;
-            color: #ccc;
-        }
-        
-        .pulse {
-            width: 6px;
-            height: 6px;
-            background: #8b5cf6;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.1;
-        }
-        
-        .hero-text {
-            font-size: 1.25rem;
-            color: #ccc;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn-lg {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-        }
-        
-        .features {
-            padding: 4rem 0;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            border-color: rgba(139, 92, 246, 0.4);
-            transform: translateY(-4px);
-        }
-        
-        .feature-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(139, 92, 246, 0.2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            color: #8b5cf6;
-            font-size: 1.5rem;
-        }
-        
-        .feature-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .feature-text {
-            color: #ccc;
-            line-height: 1.6;
-        }
-        
-        .cta {
-            padding: 4rem 0;
-        }
-        
-        .cta-card {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 24px;
-            padding: 3rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
-            z-index: -1;
-        }
-        
-        .cta-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .cta-text {
-            color: #ccc;
-            margin-bottom: 2rem;
-        }
-        
-        footer {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding: 2rem 0;
-            text-align: center;
-            color: #666;
-            font-size: 0.875rem;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">
-                    <div class="logo-icon"></div>
-                    <span class="logo-text">GHXST DA PRODUCER<span style="color:#666">·</span><span class="text-gradient">AI</span></span>
-                </a>
-                <nav>
-                    <a href="#" class="btn btn-ghost">Sign in</a>
-                    <a href="#" class="btn btn-hero">Get started</a>
-                </nav>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon"></div>
+                <span class="logo-text">GHXST DA PRODUCER<span class="dot">·</span><span class="ai-text">AI</span></span>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link" onclick="showPage('home')">Home</a>
+                <a href="#library" class="nav-link" onclick="showPage('library')">Library</a>
+                <a href="#upload" class="nav-link" onclick="showPage('upload')">Upload</a>
+                <a href="#signin" class="nav-link" onclick="showPage('signin')">Sign In</a>
+                <button class="btn btn-primary" onclick="showPage('signup')">Get Started</button>
             </div>
         </div>
-    </header>
-    
-    <main>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
         <section class="hero">
             <div class="container">
                 <div class="badge">
                     <span class="pulse"></span>
                     AI co-producer · in private beta
                 </div>
-                <h1>Master your tracks with <span class="text-gradient">GHXST Da Producer</span>.</h1>
-                <p class="hero-text">
+                <h1>Master your tracks with <span class="gradient-text">GHXST Da Producer</span>.</h1>
+                <p class="hero-subtitle">
                     Upload a rough mix. Get a mastered version in seconds. Then chat with the AI to iterate —
                     tighter low-end, warmer vocals, louder ceiling — and ship the version that hits.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-hero btn-lg">Start producing</a>
-                    <a href="#" class="btn btn-ghost btn-lg">Sign in</a>
+                    <button class="btn btn-primary btn-lg" onclick="showPage('upload')">Start producing</button>
+                    <button class="btn btn-secondary btn-lg" onclick="showPage('signin')">Sign in</button>
                 </div>
             </div>
         </section>
-        
+
         <section class="features">
             <div class="container">
                 <div class="features-grid">
                     <div class="feature-card">
                         <div class="feature-icon">📁</div>
-                        <h3 class="feature-title">Upload anything</h3>
-                        <p class="feature-text">Drop in WAV, MP3, or AIFF up to 6 minutes. Stored privately on your account.</p>
+                        <h3>Upload anything</h3>
+                        <p>Drop in WAV, MP3, or AIFF up to 6 minutes. Stored privately on your account.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">🎵</div>
-                        <h3 class="feature-title">AI mastering</h3>
-                        <p class="feature-text">BPM and key detection plus a tailored EQ, compression and limiter chain per track.</p>
+                        <h3>AI mastering</h3>
+                        <p>BPM and key detection plus a tailored EQ, compression and limiter chain per track.</p>
                     </div>
                     <div class="feature-card">
                         <div class="feature-icon">💬</div>
-                        <h3 class="feature-title">Chat to iterate</h3>
-                        <p class="feature-text">Ask for changes in plain English. Each tweak creates a new version you can compare.</p>
+                        <h3>Chat to iterate</h3>
+                        <p>Ask for changes in plain English. Each tweak creates a new version you can compare.</p>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <section class="cta">
-            <div class="container">
-                <div class="cta-card">
-                    <div class="cta-icon">✨</div>
-                    <h2 class="cta-title">Your next single, mastered tonight.</h2>
-                    <p class="cta-text">No plugins. No waiting. Just upload and ship.</p>
-                    <a href="#" class="btn btn-hero btn-lg">Get started — it's free</a>
+    </div>
+
+    <!-- Sign In Page -->
+    <div id="signin" class="page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h2>Sign in to GHXST</h2>
+                <form id="signin-form">
+                    <div class="form-group">
+                        <label for="signin-email">Email</label>
+                        <input type="email" id="signin-email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-password">Password</label>
+                        <input type="password" id="signin-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Sign In</button>
+                </form>
+                <p class="auth-link">Don't have an account? <a href="#" onclick="showPage('signup')">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div id="signup" class="page">
+        <div class="auth-container">
+            <div class="auth-card">
+                <h2>Create your account</h2>
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-email">Email</label>
+                        <input type="email" id="signup-email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+                <p class="auth-link">Already have an account? <a href="#" onclick="showPage('signin')">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Page -->
+    <div id="upload" class="page">
+        <div class="upload-container">
+            <div class="upload-header">
+                <h1>Upload a track</h1>
+                <p>We'll detect BPM and render an 8-bar intro, 8-bar outro, and a full DJ edit (WAV + MP3).</p>
+            </div>
+            
+            <div class="upload-card">
+                <form id="upload-form">
+                    <div class="upload-zone" id="upload-zone">
+                        <div class="upload-icon">📁</div>
+                        <p class="upload-text">Click to choose or drag & drop</p>
+                        <p class="upload-subtitle">WAV, MP3, AIFF up to 6 minutes</p>
+                        <input type="file" id="file-input" accept="audio/*" hidden>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="track-title">Track Title</label>
+                            <input type="text" id="track-title" placeholder="Optional — defaults to file name">
+                        </div>
+                        <div class="form-group">
+                            <label for="genre">Genre</label>
+                            <select id="genre">
+                                <option value="hiphop">Hip Hop</option>
+                                <option value="trap">Trap</option>
+                                <option value="afro">Afrobeats</option>
+                                <option value="pop">Pop</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes">Production Notes</label>
+                        <textarea id="notes" placeholder="e.g. trap-style 808s, want bright vocal, club-ready loudness"></textarea>
+                    </div>
+                    
+                    <div class="progress-container" id="progress-container" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <p class="progress-text" id="progress-text">Processing...</p>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full" id="upload-btn">Upload & Render DJ Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Library Page -->
+    <div id="library" class="page">
+        <div class="library-container">
+            <div class="library-header">
+                <h1>Your Library</h1>
+                <button class="btn btn-primary" onclick="showPage('upload')">Upload New Track</button>
+            </div>
+            
+            <div class="tracks-grid" id="tracks-grid">
+                <!-- Tracks will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Track Detail Modal -->
+    <div id="track-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-track-title">Track Title</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="track-info">
+                    <div class="track-details">
+                        <p><strong>BPM:</strong> <span id="modal-bpm">120</span></p>
+                        <p><strong>Key:</strong> <span id="modal-key">C Major</span></p>
+                        <p><strong>Genre:</strong> <span id="modal-genre">Hip Hop</span></p>
+                    </div>
+                    <div class="track-controls">
+                        <button class="btn btn-primary">▶️ Play</button>
+                        <button class="btn btn-secondary">⬇️ Download</button>
+                    </div>
+                </div>
+                
+                <div class="chat-section">
+                    <h3>Chat with GHXST</h3>
+                    <div class="chat-messages" id="chat-messages"></div>
+                    <div class="chat-input-container">
+                        <input type="text" id="chat-input" placeholder="Ask GHXST to adjust your track...">
+                        <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                    </div>
                 </div>
             </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div class="container">
-            © 2024 GHXST Da Producer AI
         </div>
-    </footer>
-    
-    <script>
-        // Simple interactivity
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('GHXST Da Producer loaded successfully!');
-            
-            // Add click handlers
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    alert('GHXST Da Producer Demo - This would navigate to: ' + this.textContent);
-                });
-            });
-        });
-    </script>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
